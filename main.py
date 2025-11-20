@@ -2,6 +2,7 @@ import logging
 from src.database.url import get_database_url
 from src.extract.search_query_builder import SearchQueryBuilder
 from src.extract.bigquery_extractor import extract_dataframe
+from src.transform.pnad_transform import transform_pnad_dataframe
 
 POSTGRES_URL = get_database_url()
 
@@ -19,6 +20,7 @@ def build_pnad_query() -> str:
         .add_column_with_alias(column_name="V1027", alias="peso")
 
         .column_greater_than_or_equal(column_name="ano", value=2022)
+        .column_greater_than_or_equal(column_name="VD4019", value=0)
         
         .order_by(column_name="ano")
 
@@ -29,6 +31,7 @@ def build_pnad_query() -> str:
 def run():
     query = build_pnad_query()
     df = extract_dataframe(project_id="etl-pnad", query=query)
+    df = transform_pnad_dataframe(df)
 
 if __name__ == "__main__":
     run()

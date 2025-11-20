@@ -1,7 +1,7 @@
 class SearchQueryBuilder:
     def __init__(self, table_name: str):
         if (len(table_name) == 0):
-            raise ValueError("Table name should not be empty")
+            raise ValueError("Nome da tabela não deve estar vazio.")
 
         self.table_name = table_name
         self.columns = []
