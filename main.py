@@ -1,5 +1,6 @@
 import logging
 from src.database.url import get_database_url
+from src.database.database_loader import load_to_database
 from src.extract.search_query_builder import SearchQueryBuilder
 from src.extract.bigquery_extractor import extract_dataframe
 from src.transform.pnad_transform import transform_pnad_dataframe
@@ -24,7 +25,7 @@ def build_pnad_query() -> str:
         
         .order_by(column_name="ano")
 
-        .add_limit(limit_value=1000)
+        .add_limit(limit_value=1000000)
     )
     return query.get_query()
 
@@ -32,6 +33,7 @@ def run():
     query = build_pnad_query()
     df = extract_dataframe(project_id="etl-pnad", query=query)
     df = transform_pnad_dataframe(df)
+    load_to_database(df, "pnad_tratada", POSTGRES_URL)
 
 if __name__ == "__main__":
     run()
