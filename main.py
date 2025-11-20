@@ -1,6 +1,7 @@
 import logging
-from src.extract.search_query import SearchQueryBuilder
 from src.database.url import get_database_url
+from src.extract.search_query import SearchQueryBuilder
+from src.extract.bigquery_extractor import extract_dataframe
 
 POSTGRES_URL = get_database_url()
 
@@ -26,7 +27,8 @@ def build_pnad_query() -> str:
     return query.get_query()
 
 def run():
-    print(build_pnad_query())
+    query = build_pnad_query()
+    df = extract_dataframe(project_id="etl-pnad", query=query)
 
 if __name__ == "__main__":
     run()
