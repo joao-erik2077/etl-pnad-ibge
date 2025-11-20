@@ -1,0 +1,14 @@
+pandas==2.2.2
+numpy==1.26.4
+
+google-cloud-bigquery==3.25.0
+google-cloud-core==2.4.1
+google-cloud-bigquery-storage==2.26.0
+
+sqlalchemy==2.0.32
+psycopg2-binary==2.9.9
+
+python-dotenv==1.0.1
+
+pyarrow==17.0.0
+fastparquet==2024.5.0
