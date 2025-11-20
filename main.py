@@ -1,6 +1,6 @@
 import logging
 from src.database.url import get_database_url
-from src.extract.search_query import SearchQueryBuilder
+from src.extract.search_query_builder import SearchQueryBuilder
 from src.extract.bigquery_extractor import extract_dataframe
 
 POSTGRES_URL = get_database_url()
