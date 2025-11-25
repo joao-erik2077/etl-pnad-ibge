@@ -40,6 +40,10 @@ class SearchQueryBuilder:
     def column_not_equal(self, column_name: str, value):
         self.filters.append(f"{column_name} <> {value}")
         return self
+
+    def column_is_not_null(self, column_name: str):
+        self.filters.append(f"{column_name} IS NOT NULL")
+        return self
     
     def order_by(self, column_name: str, direction="ASC"):
         self.order = f"{column_name} {direction}"
