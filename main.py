@@ -19,13 +19,14 @@ def build_pnad_query() -> str:
         .add_column_with_alias(column_name="VD4019", alias="renda_domiciliar")
         .add_column_with_alias(column_name="V2001", alias="moradores")
         .add_column_with_alias(column_name="V1027", alias="peso")
-        .add_column_with_alias(column_name="V3009", alias="maior_curso_frequentado")
+        .add_column_with_alias(column_name="V3009A", alias="maior_curso_frequentado")
         .add_column_with_alias(column_name="V3008", alias="frequentou_escola")
         .add_column_with_alias(column_name="V3001", alias="sabe_ler_escrever")
         .add_column_with_alias(column_name="V3002A", alias="rede_ensino")
 
         .column_greater_than_or_equal(column_name="VD4019", value=0)
-        .column_is_not_null(column_name="V3009")
+        .column_greater_than_or_equal(column_name="ano", value=2022)
+        .column_is_not_null(column_name="V3009A")
         
         .order_by(column_name="ano")
 
