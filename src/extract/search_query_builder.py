@@ -45,6 +45,13 @@ class SearchQueryBuilder:
         self.filters.append(f"{column_name} IS NOT NULL")
         return self
     
+    def columns_are_not_null(self, columns: list[str]):
+        filter = "("
+        filter += f"{' IS NOT NULL OR '.join(columns)}"
+        filter += " IS NOT NULL)"
+        self.filters.append(filter)
+        return self
+    
     def order_by(self, column_name: str, direction="ASC"):
         self.order = f"{column_name} {direction}"
         return self
@@ -71,4 +78,5 @@ class SearchQueryBuilder:
         if limit:
             query_string += f" LIMIT {limit}"
 
+        print(query_string)
         return query_string

@@ -26,7 +26,7 @@ def build_pnad_query() -> str:
 
         .column_greater_than_or_equal(column_name="VD4019", value=0)
         .column_greater_than_or_equal(column_name="ano", value=2022)
-        .column_is_not_null(column_name="V3009A")
+        .columns_are_not_null(columns=["V3009A", "V3002A"])
         
         .order_by(column_name="ano")
 
